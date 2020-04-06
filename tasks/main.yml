@@ -1,0 +1,3 @@
+- name: Update Tools Versions
+  include_tasks: update_tool_version.yml
+  loop: "{{ tools + ([{'tool': tool, 'version': version}] if tool else []) }}"

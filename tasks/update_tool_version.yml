@@ -1,0 +1,12 @@
+- name: Read current Version
+  command: "uberspace tools version show {{ item.tool }}"
+  register: uberspace_tools_version_result
+  failed_when: uberspace_tools_version_result.rc != 0
+  changed_when: false
+
+- name: Set Version
+  when:
+    - item.version not in uberspace_tools_version_result.stdout
+  command: "uberspace tools version use {{ item.tool }} {{ item.version }}"
+
+    
